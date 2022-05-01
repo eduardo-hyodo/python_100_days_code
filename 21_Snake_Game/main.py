@@ -23,6 +23,9 @@ while game_is_on:
 
     snake.move()
 
+    if snake.head.distance(food) < 15:
+        food.respawn()
+
     if snake.head.xcor() >= 300:
         game_is_on = False
     elif snake.head.xcor() <= -300:
