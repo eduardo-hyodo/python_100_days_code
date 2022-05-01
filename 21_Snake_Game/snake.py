@@ -7,6 +7,7 @@ class Snake:
         self.turn = None
         self.turn_point = None
         self.create_snake()
+        self.head = self.segments[0]
 
     def create_snake(self):
        for i in range(0,3):
