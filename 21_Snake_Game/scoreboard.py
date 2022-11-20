@@ -27,6 +27,7 @@ class Scoreboard (Turtle):
                 align=ALIGNMENT,
                 font=FONT
         )
+
     def show_score(self):
         self.clear()
         score_string = f"The score: {self.score}"
