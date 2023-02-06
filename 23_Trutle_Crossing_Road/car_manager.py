@@ -19,6 +19,7 @@ class CarManager():
         car = Turtle()
         car.shape("square")
         car.color(rd.choice(COLORS))
+        car.shapesize(stretch_wid=1, stretch_len=2)
         car.penup()
         car.goto(x,y)
         car.setheading(180)
