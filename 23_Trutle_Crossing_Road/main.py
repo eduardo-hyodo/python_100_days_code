@@ -28,4 +28,8 @@ while game_is_on:
         car_manager.add_car(280, rd.randint(-260,260))
         car_freq = 0
 
+    if player.ycor() > 275:
+        player.reset()
+        time.sleep(1.1)
+        car_freq = 0
 screen.exitonclick()
