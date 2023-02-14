@@ -28,3 +28,9 @@ class CarManager():
     def move_cars(self):
         for car in self.cars:
             car.forward(self.speed)
+    
+    def hasCollision(self, turtle_position):
+        for car in self.cars:
+           if car.distance(turtle_position) <= 2:
+                return True
+

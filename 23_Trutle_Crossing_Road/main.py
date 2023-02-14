@@ -20,10 +20,11 @@ screen.listen()
 game_level = 0 
 game_is_on = True
 car_freq = 0
+sleep_time = 0.1
 
 while game_is_on:
     screen.update()
-    time.sleep(0.1)
+    time.sleep(sleep_time)
     car_freq += 1
 
     car_manager.move_cars()
@@ -35,8 +36,12 @@ while game_is_on:
         time.sleep(1.1)
         car_freq = 0
         game_level += 1
+        sleep_time -= 0.02
     elif car_freq % (10 - game_level) == 0 :
         car_manager.add_car(280, rd.randint(-260,260))
         car_freq = 0
-    print(game_level)
+    for car  in car_manager.cars:
+        if car.distance(player.position()) <= 22:
+            game_is_on = False
+            print("Game over")
 screen.exitonclick()
