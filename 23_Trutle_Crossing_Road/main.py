@@ -34,7 +34,6 @@ while game_is_on:
     elif player.ycor() > OTHER_STREET_SIDE:
         player.reset()
         time.sleep(1.1)
-        car_freq = 0
         game_level += 1
         sleep_time -= 0.02
     elif car_freq % (10 - game_level) == 0 :
