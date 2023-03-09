@@ -26,10 +26,14 @@ while len(guessed_states) < 50:
         # )
         # df_misssing_states.to_csv("missing_states.csv")
         # or without Pandas
-        missing_states = []
-        for state in all_states:
-            if state not in guessed_states:
-                missing_states.append(state)
+
+        # Version without comprehesion list
+        # missing_states = []
+        # for state in all_states:
+        #     if state not in guessed_states:
+        #         missing_states.append(state)
+
+        missing_states = [ state for state in all_states if state not in guessed_states]
         df_misssing_states = pd.DataFrame(missing_states)
         df_misssing_states.to_csv("missing_states.csv")
         break
