@@ -21,10 +21,17 @@ window = Tk()
 window.title("Pomodoro")
 window.config(padx=100, pady=50, bg=YELLOW)
 canvas = Canvas(width=300, height=400, bg=YELLOW, highlightthickness=0)
+check_marker = "✔"
 tomate_img = PhotoImage(file="./tomato.png")
 canvas.create_image(150,200, image=tomate_img)
 canvas.create_text(155,220, text="00:00", fill="black", font=(FONT_NAME, 40, "bold"))
-canvas.pack()
+canvas.grid(column=1, row=1)
+
+btn_start =  Button(text="start" )
+btn_start.grid(column=0, row=2)
+btn_reset =  Button(text="reset" )
+btn_reset.grid(column=2, row=2)
+
 
 
 window.mainloop()
