@@ -22,6 +22,7 @@ window.title("Pomodoro")
 canvas = Canvas(width=300, height=400)
 tomate_img = PhotoImage(file="./tomato.png")
 canvas.create_image(150,200, image=tomate_img)
+canvas.create_text(150,225, text="00:00", fill="white", font=(FONT_NAME, 35, "bold"))
 canvas.pack()
 
 
