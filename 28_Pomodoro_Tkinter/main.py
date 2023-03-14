@@ -1,11 +1,11 @@
-from tkinter import Tk, Canvas, Button, PhotoImage
+from tkinter import Tk, Canvas, Button, PhotoImage, Label
 
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
 RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
-FONT_NAME = "Courier"
+FONT_NAME = "FiraCode Nerd"
 WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
@@ -27,10 +27,14 @@ canvas.create_image(150,200, image=tomate_img)
 canvas.create_text(155,220, text="00:00", fill="black", font=(FONT_NAME, 40, "bold"))
 canvas.grid(column=1, row=1)
 
-btn_start =  Button(text="start" )
+lbl_over_head = Label(text="Timer", font=(FONT_NAME,40, "bold"), bg=YELLOW, fg=GREEN) 
+lbl_over_head.grid(column=1, row=0)
+btn_start = Button(text="start" )
 btn_start.grid(column=0, row=2)
 btn_reset =  Button(text="reset" )
 btn_reset.grid(column=2, row=2)
+lbl_check = Label(text=check_marker,font=(FONT_NAME,40, "bold"),  bg=YELLOW, fg=GREEN)
+lbl_check.grid(column=1, row=3)
 
 
 
