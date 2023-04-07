@@ -11,7 +11,16 @@ WORK_MIN = 25
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 reps = 0
+timer = 0
 # ---------------------------- TIMER RESET ------------------------------- # 
+def reset_timer():
+    global timer
+    window.after_cancel(timer)
+    canvas.itemconfig(txt_timer, text="00:00")
+    lbl_over_head.config(text="Timer")
+    # lbl_check.config(text="")
+    global reps
+    reps = 0
 
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 def start_timer():
@@ -43,7 +52,8 @@ def count_down(count):
     canvas.itemconfig(txt_timer, text=f"{min}:{sec}" )
     
     if count > 0:
-        window.after(1000,count_down,count-1)
+        global timer
+        timer = window.after(1000,count_down,count-1)
     else:
         start_timer()
 # ---------------------------- UI SETUP ------------------------------- #
@@ -51,7 +61,7 @@ window = Tk()
 window.title("Pomodoro")
 window.config(padx=100, pady=50, bg=YELLOW)
 canvas = Canvas(width=300, height=400, bg=YELLOW, highlightthickness=0)
-check_marker = "X"
+# check_marker = "X"
 tomate_img = PhotoImage(file="./tomato.png")
 canvas.create_image(150,200, image=tomate_img)
 txt_timer = canvas.create_text(155,220, text="00:00", fill="black", font=(FONT_NAME, 40, "bold"))
@@ -61,9 +71,9 @@ lbl_over_head = Label(text="Timer", font=(FONT_NAME,40, "bold"), bg=YELLOW, fg=G
 lbl_over_head.grid(column=1, row=0)
 btn_start = Button(text="start", command=start_timer)
 btn_start.grid(column=0, row=2)
-btn_reset =  Button(text="reset" )
+btn_reset =  Button(text="reset", command=reset_timer)
 btn_reset.grid(column=2, row=2)
-lbl_check = Label(text=check_marker,font=(FONT_NAME,40, "bold"),  bg=YELLOW, fg=GREEN)
-lbl_check.grid(column=1, row=3)
+# lbl_check = Label(text=check_marker,font=(FONT_NAME,40, "bold"),  bg=YELLOW, fg=GREEN)
+# lbl_check.grid(column=1, row=3)
 
 window.mainloop()
