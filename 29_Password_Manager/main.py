@@ -1,20 +1,24 @@
-from tkinter import END, Tk, Canvas, Entry, Button, PhotoImage, Label
+from tkinter import END, Tk, Canvas, Entry, Button, PhotoImage, Label, messagebox
+
 
 WHITE = "#ffffff"
 BLACK = "#000000"
 FONT_NAME = "Arial"
 FONT = (FONT_NAME, 16, "bold") 
-user_info = ""
 
 def save():
-    with open("data.txt", mode="a") as file:
-        global user_info
-        user_info = input_website.get() + "|"
-        user_info += input_user_input.get() + "|"
-        user_info += input_password.get()
-        if user_info != "":
-            file.write(user_info + "\n")
-    clear()
+    user_website = input_website.get() 
+    user_input = input_user_input.get() 
+    user_pwd = input_password.get()
+    is_ok_to_save =  messagebox.askokcancel( title=user_website,
+                              message=f"These are the details entered:\n"
+                                    f"Email: {user_input} \n"
+                                    f"Password:{user_pwd}\n"
+                                    f"Is it ok to save?") 
+    if is_ok_to_save:
+        with open("data.txt", mode="a") as file:
+            file.write(f"{user_website} | {user_input} | {user_pwd} \n")
+        clear()
 
 def clear():
     input_website.delete(0,END)
