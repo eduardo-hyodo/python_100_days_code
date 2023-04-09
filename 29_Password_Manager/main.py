@@ -10,15 +10,19 @@ def save():
     user_website = input_website.get() 
     user_input = input_user_input.get() 
     user_pwd = input_password.get()
-    is_ok_to_save =  messagebox.askokcancel( title=user_website,
-                              message=f"These are the details entered:\n"
-                                    f"Email: {user_input} \n"
-                                    f"Password:{user_pwd}\n"
-                                    f"Is it ok to save?") 
-    if is_ok_to_save:
-        with open("data.txt", mode="a") as file:
-            file.write(f"{user_website} | {user_input} | {user_pwd} \n")
-        clear()
+    
+    if len(user_website) == 0 or len(user_input) == 0 or len(user_pwd) == 0:
+        messagebox.showerror(title="Input empty", message="Please make sure you haven't left any fields empty")
+    else:
+        is_ok_to_save =  messagebox.askokcancel( title=user_website,
+                                  message=f"These are the details entered:\n"
+                                        f"Email: {user_input} \n"
+                                        f"Password:{user_pwd}\n"
+                                        f"Is it ok to save?") 
+        if is_ok_to_save:
+            with open("data.txt", mode="a") as file:
+                file.write(f"{user_website} | {user_input} | {user_pwd} \n")
+            clear()
 
 def clear():
     input_website.delete(0,END)
