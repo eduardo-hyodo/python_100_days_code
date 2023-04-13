@@ -1,11 +1,29 @@
 from tkinter import END, Tk, Canvas, Entry, Button, PhotoImage, Label, messagebox
-
+from random import randint, choice, shuffle
 
 WHITE = "#ffffff"
 BLACK = "#000000"
 FONT_NAME = "Arial"
 FONT = (FONT_NAME, 16, "bold") 
 
+# Password Generator
+def password_generator():
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+
+    password_list = []
+    password_list += [ choice(letters) for _ in range(randint(8, 10))]
+    password_list += [ choice(symbols) for _ in range(randint(2, 4))]
+    password_list += [ choice(numbers) for _ in range(randint(2, 4))]
+    
+    shuffle(password_list)
+
+    password = "".join(password_list) 
+    input_password.delete(0,END)
+    input_password.insert(0, password)
+
+# Save FILE
 def save():
     user_website = input_website.get() 
     user_input = input_user_input.get() 
@@ -54,7 +72,7 @@ lbl_password = Label(text="Password:", font=FONT, bg=WHITE, fg=BLACK)
 lbl_password.grid(column=0, row=3)
 input_password = Entry(width=21)
 input_password.grid(column=1, row=3)
-btn_generate_pwd = Button(text="Generate Password")
+btn_generate_pwd = Button(text="Generate Password", command=password_generator)
 btn_generate_pwd.grid(column=2, row=3)
 
 btn_add_pwd = Button(text="Add", width=36, command=save)
