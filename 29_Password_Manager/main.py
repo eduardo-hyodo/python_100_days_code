@@ -1,5 +1,6 @@
 from tkinter import END, Tk, Canvas, Entry, Button, PhotoImage, Label, messagebox
 from random import randint, choice, shuffle
+import pyperclip 
 
 WHITE = "#ffffff"
 BLACK = "#000000"
@@ -22,6 +23,7 @@ def password_generator():
     password = "".join(password_list) 
     input_password.delete(0,END)
     input_password.insert(0, password)
+    pyperclip.copy(password)
 
 # Save FILE
 def save():
