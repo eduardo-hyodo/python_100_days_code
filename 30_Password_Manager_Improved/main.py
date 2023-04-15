@@ -26,6 +26,22 @@ def password_generator():
     input_password.insert(0, password)
     pyperclip.copy(password)
 
+# Search Password on File
+def search_password():
+    user_website = input_website.get() 
+    try:
+        with open("data.json", mode="r") as file:
+            data = json.load(file)
+            messagebox.showinfo( title=f"{user_website}", 
+                        message=f"Email:{data[user_website]['email']} \n"
+                                f"Password: {data[user_website]['password']}")
+    except FileNotFoundError:
+            messagebox.showerror( title="There is no data", 
+                        message="There is no data saved on this decive")
+    except KeyError:
+            messagebox.showerror( title="No details for the website exits", 
+                        message="There is no data saved on this decive")
+
 # Save FILE
 def save():
     user_website = input_website.get() 
@@ -48,10 +64,13 @@ def save():
                                         f"Password:{user_pwd}\n"
                                         f"Is it ok to save?") 
         if is_ok_to_save:
-            with open("data.json", mode="r") as file:
-                data = json.load(file)
-                data.update(new_data)
-
+            try:
+                with open("data.json", mode="r") as file:
+                    data = json.load(file)
+                    data.update(new_data)
+            except FileNotFoundError:
+                data = new_data
+                pass
             with open("data.json", mode="w") as file:
                 json.dump(data, file, indent=4)
             clear()
@@ -72,8 +91,11 @@ canvas.grid(column=1, row=0)
 lbl_website = Label(text="Website:", font=FONT, bg=WHITE, fg=BLACK) 
 lbl_website.grid(column=0, row=1)
 input_website = Entry(width=35)
-input_website.grid(column=1, row=1, columnspan=2)
+input_website.grid(column=1, row=1, columnspan=1)
 input_website.focus()
+btn_search = Button(text="Search", command=search_password)
+btn_search.grid(column=2, row=1)
+
 
 
 lbl_user_input = Label(text="Email/User:", font=FONT, bg=WHITE, fg=BLACK) 
