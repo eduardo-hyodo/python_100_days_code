@@ -49,8 +49,7 @@ def save():
                                         f"Is it ok to save?") 
         if is_ok_to_save:
             with open("data.json", mode="w") as file:
-                # file.write(f"{user_website} | {user_input} | {user_pwd} \n")
-                json.dump(new_data, file)
+                json.dump(new_data, file, indent=4)
             clear()
 
 def clear():
