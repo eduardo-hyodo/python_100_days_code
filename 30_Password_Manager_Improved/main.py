@@ -48,8 +48,12 @@ def save():
                                         f"Password:{user_pwd}\n"
                                         f"Is it ok to save?") 
         if is_ok_to_save:
+            with open("data.json", mode="r") as file:
+                data = json.load(file)
+                data.update(new_data)
+
             with open("data.json", mode="w") as file:
-                json.dump(new_data, file, indent=4)
+                json.dump(data, file, indent=4)
             clear()
 
 def clear():
