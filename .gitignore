@@ -7,3 +7,4 @@ share
 __pycache__
 .tool-versions
 data.txt
+data.json
