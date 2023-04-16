@@ -13,30 +13,47 @@ def unknown_word():
     next_card()
 
 def known_word():
-    next_card()
+    try:
+        ditc_french_words.remove(current_card)
+    except ValueError:
+        pass
+    else:
+        print(len(ditc_french_words))
+        pd.DataFrame.from_dict(ditc_french_words).to_csv("data/words_to_learn.csv", index=False)
+        next_card()
 
 def next_card():
     global current_card, flip_timer
-
     window.after_cancel(flip_timer)
-    current_card = rd.choice(ditc_french_words)
-    canvas.itemconfig(txt_lang, text="French", fill=BLACK) 
-    canvas.itemconfig(txt_word, text=current_card["French"], fill=BLACK)
-    canvas.itemconfig(canvas_image, image=img_front_card)
-
-    flip_timer = window.after(3000, flip_card)
+    try:
+        current_card = rd.choice(ditc_french_words)
+        print_card("French", img_front_card, BLACK)
+    except IndexError:
+        current_card ={
+                "French": "Winner",
+                "English": "Winner"
+                }
+        print_card("French",img_front_card,BLACK)
+    finally:
+        flip_timer = window.after(3000, flip_card)
 
 def flip_card():
-    global current_card
+    print_card("English", img_back_card,WHITE)
 
-    canvas.itemconfig(txt_lang, text="English", fill=WHITE)
-    canvas.itemconfig(txt_word, text=current_card["English"], fill=WHITE)
-    canvas.itemconfig(canvas_image, image=img_back_card)
+def print_card(language, img_card, color):
+    global current_card
+    canvas.itemconfig(txt_lang, text=language, fill=color)
+    canvas.itemconfig(txt_word, text=current_card[language], fill=color)
+    canvas.itemconfig(canvas_image, image=img_card)
 
 #Cards
-df_french_words =  pd.read_csv("data/french_words.csv")
+try:
+    df_french_words = pd.read_csv("data/words_to_learn.csv")
+except (FileNotFoundError, pd.errors.EmptyDataError):
+    df_french_words =  pd.read_csv("data/french_words.csv")
+finally:
 # ditc_french_words = { row.French:row.English for (index, row) in df_french_words.iterrows()}
-ditc_french_words = df_french_words.to_dict(orient="records")
+    ditc_french_words = df_french_words.to_dict(orient="records")
 
 #GUI
 window = Tk()
