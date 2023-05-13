@@ -1,6 +1,7 @@
 import requests
 from  datetime import datetime
 import smtplib
+import time
 
 MY_LAT =  -42.507351
 MY_LONG = -169.127758
@@ -51,7 +52,9 @@ def send_mail():
                 to_addrs="", 
                 msg=f"subject:Hello\n\n Body Look up ")
 
-if is_iss_over_me():
-    if is_dark():
-        print("lookup")
-        send_mail()
+while True:
+    if is_iss_over_me():
+        if is_dark():
+            print("lookup")
+            send_mail()
+    time.sleep(60)
