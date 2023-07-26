@@ -10,7 +10,7 @@ for question in question_data:
     list_question.append(o_question)
 
 quiz = QuizBrain(list_question)
-quiz = QuizInterface()
+quiz_ui = QuizInterface(quiz)
 
 while quiz.still_has_question():
     quiz.next_question()

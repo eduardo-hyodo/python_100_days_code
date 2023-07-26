@@ -1,30 +1,34 @@
 THEME_COLOR = "#375262"
-from tkinter import Tk, Canvas, Button, Label
+from tkinter import *
+from quiz_brain import QuizBrain
 
 class QuizInterface:
 
-    def __init__(self):
+    def __init__(self, quiz: QuizBrain):
+        self.quiz = quiz
         self.window = Tk()
         self.window.title("Quizzler")
-        self.window.config(padx=50, pady=50)
+        self.window.config(padx=50, pady=50, bg=THEME_COLOR)
 
-        self.canvas = Canvas(width=300, height=400)
+        self.canvas = Canvas(width=350, height=250, bg="white")
         self.canvas.grid(row=0, column=0)
 
         self.button_true = Button(highlightthickness=0, text="True")
         self.button_false = Button(highlightthickness=0, text="False")
 
-        self.score_lbl = Label(text="Score:", font=("Arial"))
+        self.score_lbl = Label(text="Score: 0", fg="white", bg=THEME_COLOR, font=("Arial"))
         self.score_lbl.grid(row=0, column=1)
 
-        self.score_text = self.canvas.create_text( 300, 250, text="0", font=("Arial"))
+        self.question_text = self.canvas.create_text(150,50,width=200,fill=THEME_COLOR,text="Question in here")
+        self.canvas.grid(row=1, column=0,columnspan=2, pady=50)
 
-        self.question_text = self.canvas.create_text( 150,
-                                             270,
-                                             text="Question in here",
-                                             width=250,
-                                             font=("Arial"))
+        self.button_true.grid(row=2, column=0)
+        self.button_false.grid(row=2, column=1)
 
-        self.button_true.grid(row=1, column=0)
-        self.button_false.grid(row=1, column=1)
+        self.get_next_question()
+
         self.window.mainloop()
+
+    def get_next_question(self):
+        q_text = self.quiz.next_question()
+        self.canvas.itemconfig(self.question_text, text=q_text)
