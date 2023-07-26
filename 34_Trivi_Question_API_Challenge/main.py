@@ -1,6 +1,7 @@
 from data import question_data
 from question_model import Question
 from quiz_brain import QuizBrain
+from ui import QuizInterface
 
 list_question = []
 
@@ -9,5 +10,8 @@ for question in question_data:
     list_question.append(o_question)
 
 quiz = QuizBrain(list_question)
+quiz = QuizInterface()
+
 while quiz.still_has_question():
     quiz.next_question()
+
