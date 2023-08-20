@@ -14,4 +14,3 @@ quiz_ui = QuizInterface(quiz)
 
 while quiz.still_has_question():
     quiz.next_question()
-

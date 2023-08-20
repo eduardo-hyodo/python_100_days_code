@@ -1,14 +1,14 @@
 import html
 
-class QuizBrain:
 
+class QuizBrain:
     def __init__(self, o_question_list):
         self.question_number = 0
-        self.question_list = o_question_list 
+        self.question_list = o_question_list
         self.score = 0
 
     def still_has_question(self):
-        if self.question_number ==  len(self.question_list):
+        if self.question_number == len(self.question_list):
             return False
         return True
 
