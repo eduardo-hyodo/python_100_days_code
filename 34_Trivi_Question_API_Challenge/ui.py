@@ -1,5 +1,6 @@
 from tkinter import Tk, Label, Button, Canvas
 from quiz_brain import QuizBrain
+import time
 
 THEME_COLOR = "#375262"
 
@@ -14,8 +15,9 @@ class QuizInterface:
         self.canvas = Canvas(width=350, height=250, bg="white")
         self.canvas.grid(row=0, column=0)
 
-        self.button_true = Button(highlightthickness=0, text="True")
-        self.button_false = Button(highlightthickness=0, text="False")
+        self.button_true = Button(highlightthickness=0, text="True",
+                                  command=self.check_true)
+        self.button_false = Button(highlightthickness=0, text="False", command=self.check_false)
 
         self.score_lbl = Label(
             text="Score: 0", fg="white", bg=THEME_COLOR, font=("Arial")
@@ -35,5 +37,28 @@ class QuizInterface:
         self.window.mainloop()
 
     def get_next_question(self):
+        self.check_score()
         q_text = self.quiz.next_question()
+        self.canvas.config(bg="white")
         self.canvas.itemconfig(self.question_text, text=q_text)
+
+    def check_false(self):
+        answer = self.quiz.check_answer(user_answer="false")
+        self.feedback_answer(answer)
+        #self.check_score()
+
+    def check_true(self):
+        answer = self.quiz.check_answer(user_answer="true")
+        self.feedback_answer(answer)
+        #self.check_score()
+    
+    def check_score(self):
+        score = f"Score: {self.quiz.score}"
+        self.score_lbl.config(text=score)
+
+    def feedback_answer(self, answer):
+        if answer:
+            self.canvas.config(bg="green")
+        else:
+            self.canvas.config(bg="red")
+        self.window.after(500, self.get_next_question) 
