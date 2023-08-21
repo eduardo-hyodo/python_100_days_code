@@ -37,20 +37,23 @@ class QuizInterface:
         self.window.mainloop()
 
     def get_next_question(self):
-        self.check_score()
-        q_text = self.quiz.next_question()
         self.canvas.config(bg="white")
-        self.canvas.itemconfig(self.question_text, text=q_text)
+        self.check_score()
+        if self.quiz.still_has_question():
+            q_text = self.quiz.next_question()
+            self.canvas.itemconfig(self.question_text, text=q_text)
+        else:
+            self.canvas.itemconfig(self.question_text, text="There are no more question")
+            self.button_false.config(state="disabled")
+            self.button_true.config(state="disabled")
 
     def check_false(self):
         answer = self.quiz.check_answer(user_answer="false")
         self.feedback_answer(answer)
-        #self.check_score()
 
     def check_true(self):
         answer = self.quiz.check_answer(user_answer="true")
         self.feedback_answer(answer)
-        #self.check_score()
     
     def check_score(self):
         score = f"Score: {self.quiz.score}"
