@@ -8,15 +8,15 @@ with open("data.txt") as access:
     lon = access.readline().rstrip()
     api_key = access.readline().rstrip()
     account_sid = access.readline().rstrip()
-    auth_token =  access.readline().rstrip()
-    from_cellphone =  access.readline().rstrip()
-    to_cellphone =  access.readline().rstrip()
+    auth_token = access.readline().rstrip()
+    from_cellphone = access.readline().rstrip()
+    to_cellphone = access.readline().rstrip()
 
 weather_params = {
-    "lat":  lat,
+    "lat": lat,
     "lon": lon,
     "appid": api_key,
-    "exclude": "daily,minutely,current"
+    "exclude": "daily,minutely,current",
 }
 
 response = requests.get(OWM_Endpoint, params=weather_params)
@@ -34,8 +34,6 @@ for item in hourly_weather:
 if will_rain:
     client = Client(account_sid, auth_token)
     message = client.messages.create(
-      from_ = from_cellphone,
-      body = "take a umbrella",
-      to = to_cellphone
+        from_=from_cellphone, body="take a umbrella", to=to_cellphone
     )
     print(message.sid)
