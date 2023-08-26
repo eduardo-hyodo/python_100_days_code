@@ -7,6 +7,7 @@ with open("data.txt") as access:
     nutrition_api_key = access.readline().rstrip()
     nutrition_app_id = access.readline().rstrip()
     sheety_api_key = access.readline().rstrip()
+    beaer_token = access.readline().rstrip()
 
 headers = {
     "x-app-id": nutrition_app_id,
@@ -23,13 +24,16 @@ body = {
 
 response = requests.post(url=NUTRITION_URL, headers=headers, json=body)
 exercise = response.json()["exercises"][0]
-print(exercise["duration_min"])
+# print(exercise["duration_min"])
 
 
 sheety_url = f"https://api.sheety.co/{sheety_api_key}/workout/log"
 today = datetime.today()
 date = today.strftime("%d/%m/%Y")
 time = today.strftime("%H:%M:%S")
+workout_headers = {
+    "Authorization": f"Bearer {beaer_token}",
+}
 workout_body = {
     "log": {
         "date": str(date),
@@ -40,6 +44,6 @@ workout_body = {
     }
 }
 
-log_resonse = requests.post(url=sheety_url, json=workout_body)
+log_resonse = requests.post(url=sheety_url, json=workout_body, headers=workout_headers)
 # log_resonse = requests.get(url=sheety_url)
 print(log_resonse.text)
