@@ -8,4 +8,5 @@ __pycache__
 .tool-versions
 data.txt
 data.json
+key.bin
 words_to_learn.csv
