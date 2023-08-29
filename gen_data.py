@@ -5,10 +5,10 @@ import json
 
 class Data:
     def __init__(self):
-        with open("./key.bin", "rb") as key:
+        with open("../key.bin", "rb") as key:
             new_key = key.read()
 
-        with open("./data.bin", "rb") as data_bin:
+        with open("../data.bin", "rb") as data_bin:
             iv = data_bin.read(16)
             new_data = data_bin.read()
             new_cipher = AES.new(new_key, AES.MODE_CBC, iv=iv)
