@@ -9,10 +9,10 @@ class DataManager:
     def get_cities(self):
         response = requests.get(url=self.api_url, headers=self.headers)
         # print(response.text)
-        return response.json()
+        return response.json()["cities"]
 
     def update_city(self, item):
-        print(item)
+        # print(item)
         response = requests.put(
             url=f"{self.api_url}/{item['city']['id']}",
             headers=self.headers,

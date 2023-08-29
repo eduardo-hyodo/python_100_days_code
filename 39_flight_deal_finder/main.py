@@ -1,13 +1,18 @@
 import data_manager
 import flight_search as fs
+import sys
+import os
 
+current = os.path.dirname(os.path.realpath("gen_data.py"))
+parent = os.path.dirname(current)
+sys.path.append(parent)
+from gen_data import Data
 
-with open("data.txt") as access:
-    sheety_api_token = access.readline().rstrip()
-    kiwi_api_token = access.readline().rstrip()
-
-data = data_manager.DataManager(sheety_api_token)
-# cities = data.get_cities()["cities"]
+access_data = Data().get()["app"]
+sheety_api_token = access_data[0]["api_key"]
+kiwi_api_token = access_data[1]["api_key"]
+# data = data_manager.DataManager(sheety_api_token)
+# cities = data.get_cities()
 cities = [
     {
         "city": "montreal",
@@ -15,6 +20,7 @@ cities = [
         "id": 2,
     },
 ]
+# print(cities)
 
 flight_search = fs.FlightSearch(kiwi_api_token)
 for city in cities:
@@ -29,10 +35,8 @@ for city in cities:
     #     }
     # }
     # data.update_city(new_city)
-    flights = flight_search.search_flight(city_code)
-    print(flights[0]["price"])
-    print(flights[0]["airlines"])
-    print(flights[0]["route"])
+    flight = flight_search.search_flight(city_code)
+    print(flight)
     # for flight in flights:
     #     print(flight["price"])
     #     print(flight)
