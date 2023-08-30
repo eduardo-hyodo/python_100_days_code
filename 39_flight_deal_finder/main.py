@@ -1,11 +1,7 @@
 import data_manager
 import flight_search as fs
-import sys
-import os
 
-current = os.path.dirname(os.path.realpath("gen_data.py"))
-parent = os.path.dirname(current)
-sys.path.append(parent)
+# PYTHONPATH=$PWD/../
 from gen_data import Data
 
 access_data = Data().get()["app"]
@@ -20,7 +16,6 @@ cities = [
         "id": 2,
     },
 ]
-# print(cities)
 
 flight_search = fs.FlightSearch(kiwi_api_token)
 for city in cities:
