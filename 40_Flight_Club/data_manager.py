@@ -9,7 +9,7 @@ class DataManager:
         self.headers = {"Authorization": f"Bearer {api_token}"}
 
     def get_cities(self):
-        response = requests.get(url=self.api_url, headers=self.headers)
+        response = requests.get(url=f"{self.api_url}cities/", headers=self.headers)
         # print(response.text)
         return response.json()["cities"]
 
