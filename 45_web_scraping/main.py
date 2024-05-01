@@ -8,34 +8,27 @@ soup = BeautifulSoup(response.text, "html.parser")
 # article_tag = soup.find(name="a", class_="title")
 # should be like above, however the site changed since the record
 # of the video, now the ancho is without class inside a span
-# the span has the class title
-article_tag = soup.select_one(".title a")
-article_text = article_tag.getText()
-article_link = article_tag.get("href")
-article_upvote = soup.find(name="span", class_="score").getText()
-print(article_tag)
-print(article_text)
-print(article_upvote)
-
-# TODO improve the select or filter after to clean, because there are more anchor then it should
-article_tags = soup.select(".title a")
+article_tags = soup.find_all("span", "titleline")
 article_texts = []
 article_links = []
 for article_tag in article_tags:
-    article_text = article_tag.getText()
+    article = article_tag.findChildren("a", recursive=False)[0]
+    article_text = article.getText()
     article_texts.append(article_text)
-    article_link = article_tag.get("href")
+    article_link = article.get("href")
     article_links.append(article_link)
 
-article_upvotes = [
-    int(score.getText().split()[0])
-    for score in soup.find_all(name="span", class_="score")
-]
+article_upvotes = []
+for subtext in soup.find_all(class_="subtext"):
+    score = subtext.findChildren(class_="score")
+    if not score:
+        article_upvotes.append(0)
+    else:
+        article_upvotes.append(int(score[0].getText().split()[0]))
 
 print(article_texts)
 print(article_links)
 print(article_upvotes)
-
 largest_score = max(article_upvotes)
 largest_score_index = article_upvotes.index(largest_score)
 print(article_texts[largest_score_index])
