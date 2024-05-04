@@ -34,7 +34,7 @@ sp = spotipy.Spotify(auth_manager=auth_manager)
 user_id = sp.current_user()["id"]
 # print(user_id)
 
-playlist = sp.user_playlist_create(user=user_id, name=f"Billboard 100", public=False)
+playlist = sp.user_playlist_create(user=user_id, name="Billboard 100", public=False)
 # print(playlisturi_songs = []
 
 uri_songs = []
@@ -47,3 +47,8 @@ for index, song in enumerate(song_names):
     except IndexError:
         print(f"{song} doesn't exist in Spotify. Skipped.")
 # print(uri_songs)
+
+sp.playlist_add_items(
+    playlist_id=playlist["id"],
+    items=uri_songs,
+)
