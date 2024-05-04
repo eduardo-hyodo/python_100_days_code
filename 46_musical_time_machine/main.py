@@ -35,4 +35,15 @@ user_id = sp.current_user()["id"]
 # print(user_id)
 
 playlist = sp.user_playlist_create(user=user_id, name=f"Billboard 100", public=False)
-# print(playlist)
+# print(playlisturi_songs = []
+
+uri_songs = []
+for index, song in enumerate(song_names):
+    search_value = f"track:{song} artist:{artists_names[index]}"
+    result = sp.search(q=search_value, type="track")
+    try:
+        uri = result["tracks"]["items"][0]["uri"]
+        uri_songs.append(uri)
+    except IndexError:
+        print(f"{song} doesn't exist in Spotify. Skipped.")
+# print(uri_songs)
