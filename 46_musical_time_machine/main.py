@@ -33,3 +33,6 @@ auth_manager = spotipy.SpotifyOAuth(
 sp = spotipy.Spotify(auth_manager=auth_manager)
 user_id = sp.current_user()["id"]
 # print(user_id)
+
+playlist = sp.user_playlist_create(user=user_id, name=f"Billboard 100", public=False)
+# print(playlist)
