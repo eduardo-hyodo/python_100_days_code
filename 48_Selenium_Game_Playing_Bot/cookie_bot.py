@@ -2,7 +2,6 @@ import threading
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
 
 driver = webdriver.Firefox()
 driver.get("http://orteil.dashnet.org/experiments/cookie/")
