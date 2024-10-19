@@ -13,7 +13,7 @@ class Data:
             new_data = data_bin.read()
             new_cipher = AES.new(new_key, AES.MODE_CBC, iv=iv)
             self.uncipher_data = unpad(new_cipher.decrypt(new_data), AES.block_size)
-            # print(str(uncipher_data, "utf-8"))
+            # print(str(self.uncipher_data, "utf-8"))
 
     def get(self):
         # return json.loads(str(self.uncipher_data, "utf-8"))
