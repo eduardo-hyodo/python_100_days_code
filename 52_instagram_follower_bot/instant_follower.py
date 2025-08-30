@@ -62,8 +62,16 @@ class InstantFollower:
                 By.XPATH, value="/html/body/div[1]/div/div/div[2]/div/div/div[1]/div[2]/div[1]/section/main/div/div/header/section[3]/ul/li[3]/div/a/span"
                 )
         following_button.click()
-        time.sleep(5)
-        return self
     
     def follow(self):
-        print("teste")
+        time.sleep(3)
+        follow_button = self.driver.find_element(By.CSS_SELECTOR, value="._aswp._aswr._aswu._asw_._asx2")
+        follow_button.send_keys(Keys.END)
+        time.sleep(5)
+
+        all_buttons = self.driver.find_elements(By.CSS_SELECTOR, value="._aswp._aswr._aswu._asw_._asx2")
+        for button in all_buttons:
+            try:
+                button.click()
+            except Exception:
+                print("error")
