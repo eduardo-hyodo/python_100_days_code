@@ -16,7 +16,7 @@ class PropertyScrapper:
     
     def get_prices(self):
         list = self.soup.find_all(class_="PropertyCardWrapper__StyledPriceLine")
-        price_list = [price.getText().strip() for price in list]
+        price_list = [price.getText().replace("/mo","").split("+")[0] for price in list]
         return price_list
 
     def get_urls(self):
