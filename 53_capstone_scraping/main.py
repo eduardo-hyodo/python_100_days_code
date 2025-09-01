@@ -17,3 +17,9 @@ list = soup.find_all(class_="PropertyCardWrapper__StyledPriceLine")
 price_list = [ price.getText().strip() for price in list]
 for item in price_list:
     print(item[1:6])
+
+list = soup.find_all(class_="StyledPropertyCardDataArea-anchor")
+url_list = [ url.get("href") for url in list]
+for url in url_list:
+    print(url)
+
