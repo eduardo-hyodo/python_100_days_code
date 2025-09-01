@@ -23,3 +23,7 @@ url_list = [ url.get("href") for url in list]
 for url in url_list:
     print(url)
 
+list = soup.find_all('address')
+address_list = [ address.getText().strip() for address in list]
+for address in address_list:
+    print(address)
