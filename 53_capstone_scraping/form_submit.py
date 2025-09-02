@@ -20,7 +20,7 @@ class FormSubmit:
             submit_button.click()
             time.sleep(1.5)
             self.new_response()
-        driver.quit()
+        self.driver.quit()
 
     def new_response(self):
         new_response_button = self.driver.find_element(By.XPATH, value='/html/body/div[1]/div[2]/div[1]/div/div[4]/a')
