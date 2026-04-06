@@ -25,6 +25,25 @@ def guess(guest_name):
 
     return render_template("guess.html", guest_name=guest_name, guest_gender=gender, guest_age=guest_age)
 
+@app.route("/blog")
+def blog():
+    blog_posts = get_blog_posts()
+    return render_template("blog.html", posts=blog_posts)
+
+@app.route("/post/<int:post_id>")
+def post(post_id):
+    blog_posts = get_blog_posts()
+    post = next((p for p in blog_posts if p["id"] == post_id), None)
+    print(post)
+    return render_template("post.html", post=post)
+
+
+def get_blog_posts():
+    response_blog = requests.get("https://api.npoint.io/a0a7cb106868f0d7c692")
+    response_blog.raise_for_status()
+    blog_posts =  response_blog.json()
+    return blog_posts
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
 
