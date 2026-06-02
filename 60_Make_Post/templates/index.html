@@ -17,36 +17,18 @@
 </head>
   <body>
     <div>
-  <form id="contactForm" method="POST" action="/login" >
-    <div class="form-floating">
-        <input class="form-control" id="name" type="text" placeholder="Enter your name..." />
-        <label for="name">Name</label>
-    </div>
-    <div class="form-floating">
-        <input class="form-control" id="password" type="password" placeholder="Password" data-sb-validations="required,password" />
-        <label for="Password">Password</label>
-    </div>
-    <br />
-    <!-- Submit success message-->
-    <!---->
-    <!-- This is what your users will see when the form-->
-    <!-- has successfully submitted-->
-    <div class="d-none" id="submitSuccessMessage">
-        <div class="text-center mb-3">
-            <div class="fw-bolder">Form submission successful!</div>
-            To activate this form, sign up at
-            <br />
-            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+      <form id="contactForm" method="POST" action="/login" >
+        <div class="form-floating">
+            <input class="form-control" id="name" name="username" type="text" placeholder="Enter your name..." />
+            <label for="name">Name</label>
         </div>
-    </div>
-    <!-- Submit error message-->
-    <!---->
-    <!-- This is what your users will see when there is-->
-    <!-- an error submitting the form-->
-    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-    <!-- Submit Button-->
-    <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Send</button>
-  </form>
+        <div class="form-floating">
+            <input class="form-control" id="password" name="password" type="password" placeholder="Password" data-sb-validations="required,password" />
+            <label for="Password">Password</label>
+        </div>
+        <br />
+        <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Send</button>
+      </form>
     </div>
   </body>
 </html>

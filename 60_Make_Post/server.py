@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -10,7 +10,9 @@ def index():
 
 @app.route("/login", methods=["POST"])
 def login():
-    return "logged"
+    name = request.form["username"]
+    password = request.form["password"]
+    return f"logged {name} password {password}"
 
 
 if __name__ == "__main__":
